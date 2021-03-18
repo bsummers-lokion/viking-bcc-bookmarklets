@@ -79,8 +79,17 @@ module.exports = {
                                 }
 
                                 // Transform the file contents into "javascript:the_file_contents_urlencoded"
-                                const script = buffer.toString();
-                                const bookmarklet = `javascript:${encodeURIComponent(script)}`;
+                                let script = buffer.toString().trim();
+
+                                // Remove the leading `!function()...` and replace it with `void(function()...`
+                                script = script.replace(/^!function/, 'void(function');
+
+                                // Remove the final semicolon and replace it with ')'
+                                script = script.replace(/;$/, ')');
+
+                                console.log(script);
+
+                                const bookmarklet = `javascript:(${script})`;
                                 const bookmarkletFile = path.join(__dirname, 'dist', 'bookmarklets', filename.replace(/\.bundle\.js/, '.bookmarklet.txt'));
 
                                 // Write the file to disk
