@@ -3,12 +3,24 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config webpack.config.js"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "webpack": "^5.26.3"
+    "@babel/core": "^7.13.10",
+    "@babel/preset-env": "^7.13.10",
+    "babel-loader": "^8.2.2",
+    "bookmarklet-wrapper-webpack-plugin": "^1.0.1",
+    "webpack": "^5.26.3",
+    "webpack-cli": "^4.5.0"
   }
 }
