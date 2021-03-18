@@ -87,9 +87,8 @@ module.exports = {
                                 // Remove the final semicolon and replace it with ')'
                                 script = script.replace(/;$/, ')');
 
-                                console.log(script);
+                                const bookmarklet = `javascript:${encodeURI(script)}`;
 
-                                const bookmarklet = `javascript:(${script})`;
                                 const bookmarkletFile = path.join(__dirname, 'dist', 'bookmarklets', filename.replace(/\.bundle\.js/, '.bookmarklet.txt'));
 
                                 // Write the file to disk
