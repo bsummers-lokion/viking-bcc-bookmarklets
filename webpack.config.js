@@ -81,11 +81,20 @@ module.exports = {
                                 // Transform the file contents into "javascript:the_file_contents_urlencoded"
                                 let script = buffer.toString().trim();
 
-                                // Remove the leading `!function()...` and replace it with `void(function()...`
-                                script = script.replace(/^!function/, 'void(function');
+                                const bangFunctionPattern = /^!function/
+                                const needsVoidWrapper = script.match(bangFunctionPattern);
+                                if (needsVoidWrapper) {
+                                    // Remove the leading `!function()...` and replace it with `void(function()...`
+                                    script = script.replace(bangFunctionPattern, 'void(function');
 
-                                // Remove the final semicolon and replace it with ')'
-                                script = script.replace(/;$/, ')');
+                                    // Remove the final semicolon and replace it with ')'
+                                    script = script.replace(/;$/, ')');
+                                }
+
+
+                                if (script.match(/^!function/)) {
+                                }
+
 
                                 const bookmarklet = `javascript:${encodeURI(script)}`;
 
